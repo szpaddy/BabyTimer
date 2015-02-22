@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@OnClick(value = { R.id.btn_breast_begin, R.id.btn_breast_end,
-			R.id.btn_diaper, R.id.btn_play, R.id.btn_vomit, R.id.btn_water })
+			R.id.btn_pee, R.id.btn_poop, R.id.btn_vomit, R.id.btn_water })
 	private void onActionButtonClick(View view) {
 		String action = (String) ((Button) view).getText();
 		insertBabyAction(action);

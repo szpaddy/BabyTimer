@@ -53,17 +53,24 @@
                 android:text="吃奶结束" />
 
             <Button
-                android:id="@+id/btn_diaper"
+                android:id="@+id/btn_poop"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="换尿片" />
+                android:text="便便" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_weight="0" >
+
+            <Button
+                android:id="@+id/btn_vomit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="吐奶" />
 
             <Button
                 android:id="@+id/btn_water"
@@ -73,18 +80,11 @@
                 android:text="喝水" />
 
             <Button
-                android:id="@+id/btn_play"
+                android:id="@+id/btn_pee"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="玩耍" />
-
-            <Button
-                android:id="@+id/btn_vomit"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="吐奶" />
+                android:text="尿尿" />
         </LinearLayout>
     </LinearLayout>
 
