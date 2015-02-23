@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -70,9 +71,26 @@ public class MainActivity extends BaseActivity {
 
 	@OnClick(value = { R.id.btn_breast_begin, R.id.btn_breast_end,
 			R.id.btn_pee, R.id.btn_poop, R.id.btn_vomit, R.id.btn_water })
-	private void onActionButtonClick(View view) {
+	private void onNormalActionButtonClick(View view) {
 		String action = (String) ((Button) view).getText();
 		insertBabyAction(action);
+	}
+
+	@OnClick(R.id.btn_remark)
+	private void onRemarkActionButtonClick(View view) {
+		final EditText et = new EditText(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("备注");
+		builder.setView(et);
+		builder.setPositiveButton("保存",
+				new android.content.DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						insertBabyAction(et.getText().toString());
+					}
+				});
+		builder.setNegativeButton("取消", null);
+		builder.show();
+
 	}
 
 	@OnClick(R.id.btn_date)
@@ -112,7 +130,7 @@ public class MainActivity extends BaseActivity {
 							} catch (DbException e) {
 								MainToast.show(
 										MainActivity.this,
-										String.format("%s %s",
+										String.format("保存%s %s失败",
 												item.getDisplayTime(),
 												item.getAction()),
 										Toast.LENGTH_SHORT);
