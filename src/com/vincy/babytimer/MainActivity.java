@@ -85,7 +85,15 @@ public class MainActivity extends BaseActivity {
 		builder.setPositiveButton("保存",
 				new android.content.DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						insertBabyAction(et.getText().toString());
+						String msg = et.getText().toString();
+						if (msg.trim().length() > 0) {
+							insertBabyAction(msg);
+						} else {
+							MainToast.show(
+									MainActivity.this,
+									"备注消息不能为空",
+									Toast.LENGTH_SHORT);
+						}
 					}
 				});
 		builder.setNegativeButton("取消", null);

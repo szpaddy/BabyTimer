@@ -32,7 +32,7 @@ public class BabyAction {
 	}
 
 	public String getDisplayTime() {
-		return time.substring(10);
+		return time.substring(10, 16);
 	}
 
 	public void setTime(String time) {
