@@ -7,6 +7,8 @@ public class BabyAction {
 
 	private int id;
 
+	private String babyId;
+
 	private String action;
 
 	private String time;
@@ -14,7 +16,8 @@ public class BabyAction {
 	public BabyAction() {
 	}
 
-	public BabyAction(String action, String time) {
+	public BabyAction(String babyId, String action, String time) {
+		this.babyId = babyId;
 		this.action = action;
 		this.time = time;
 	}
@@ -45,6 +48,14 @@ public class BabyAction {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getBabyId() {
+		return babyId;
+	}
+
+	public void setBabyId(String babyId) {
+		this.babyId = babyId;
 	}
 
 }
