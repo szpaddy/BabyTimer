@@ -7,12 +7,15 @@ import java.util.Locale;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,18 +23,15 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.lidroid.xutils.DbUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.lidroid.xutils.view.annotation.event.OnCompoundButtonCheckedChange;
 import com.lidroid.xutils.view.annotation.event.OnItemLongClick;
 import com.vincy.babytimer.adapter.BabyActionAdapter;
 import com.vincy.babytimer.db.MyDbUpgradeListener;
@@ -40,8 +40,24 @@ import com.vincy.babytimer.utils.MainToast;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
+	private static final String TAG = "MainActivity";
 	public static final String BABY_ID_1 = "1";
 	public static final String BABY_ID_2 = "2";
+
+	@ViewInject(R.id.btn_action_1)
+	private Button btn_action_1;
+	@ViewInject(R.id.btn_action_2)
+	private Button btn_action_2;
+	@ViewInject(R.id.btn_action_3)
+	private Button btn_action_3;
+	@ViewInject(R.id.btn_action_4)
+	private Button btn_action_4;
+	@ViewInject(R.id.btn_action_5)
+	private Button btn_action_5;
+	@ViewInject(R.id.btn_action_6)
+	private Button btn_action_6;
+	@ViewInject(R.id.btn_action_7)
+	private Button btn_action_7;
 
 	@ViewInject(R.id.lv_babyaction_1)
 	private ListView lv_babyaction_1;
@@ -56,7 +72,7 @@ public class MainActivity extends BaseActivity {
 	private TextView tv_date;
 
 	@ViewInject(R.id.btn_childNum)
-	private ToggleButton btn_childNum;
+	private Button btn_childNum;
 
 	@ViewInject(R.id.layout_actionbtns)
 	private LinearLayout layout_actionbtns;
@@ -85,21 +101,12 @@ public class MainActivity extends BaseActivity {
 		lv_babyaction_2.setAdapter(babyActionAdapter2);
 
 		updateActionDate(DateUtil.getCurrentDate());
-		initUserMode();
-		updateUI();
 	}
 
-	private void initUserMode() {
-		try {
-			if (!db.tableIsExist(Param.class)) {
-				db.save(new Param("userMode", BABY_ID_1));
-			}
-			Param param = db.findFirst(Selector.from(Param.class).where("key",
-					"=", "userMode"));
-			btn_childNum.setChecked(BABY_ID_2.equals(param.getValue()));
-		} catch (DbException e) {
-			e.printStackTrace();
-		}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		updateUI();
 	}
 
 	@Override
@@ -108,22 +115,29 @@ public class MainActivity extends BaseActivity {
 		db.close();
 	}
 
-	@OnCompoundButtonCheckedChange(R.id.btn_childNum)
-	private void onBtnChildNumCheckedChanged(CompoundButton buttonView,
-			boolean isChecked) {
-		String userMode = isChecked ? BABY_ID_2 : BABY_ID_1;
-		try {
-			Param param = db.findFirst(Selector.from(Param.class).where("key",
-					"=", "userMode"));
-			param.setValue(userMode);
-			db.update(param, "value");
-		} catch (DbException e) {
-			e.printStackTrace();
-		}
-		updateUI();
+	@OnClick(R.id.btn_childNum)
+	private void onSettingButtonClick(View view) {
+		Intent mainIntent = new Intent(this, MySettingActivity.class);
+		this.startActivity(mainIntent);
 	}
 
 	private void updateUI() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+
+		btn_action_1.setText(prefs.getString("btntext1", btn_action_1.getText()
+				.toString()));
+		btn_action_2.setText(prefs.getString("btntext2", btn_action_2.getText()
+				.toString()));
+		btn_action_3.setText(prefs.getString("btntext3", btn_action_3.getText()
+				.toString()));
+		btn_action_4.setText(prefs.getString("btntext4", btn_action_4.getText()
+				.toString()));
+		btn_action_5.setText(prefs.getString("btntext5", btn_action_5.getText()
+				.toString()));
+		btn_action_6.setText(prefs.getString("btntext6", btn_action_6.getText()
+				.toString()));
+
 		if (isUIForTwoChild()) {
 			layout_usermode.setVisibility(View.VISIBLE);
 			lv_babyaction_2.setVisibility(View.VISIBLE);
@@ -135,21 +149,23 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private boolean isUIForTwoChild() {
-		return btn_childNum.isChecked();
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		return prefs.getBoolean("ck_uiForTwoChild", false);
 	}
 
 	private boolean isBaby1Selected() {
 		return rg_baby.getCheckedRadioButtonId() == R.id.rb_baby_1;
 	}
 
-	@OnClick(value = { R.id.btn_breast_begin, R.id.btn_breast_end,
-			R.id.btn_pee, R.id.btn_poop, R.id.btn_vomit, R.id.btn_water })
+	@OnClick(value = { R.id.btn_action_1, R.id.btn_action_2, R.id.btn_action_3,
+			R.id.btn_action_4, R.id.btn_action_5, R.id.btn_action_6 })
 	private void onNormalActionButtonClick(View view) {
 		String action = (String) ((Button) view).getText();
 		insertBabyAction(action);
 	}
 
-	@OnClick(R.id.btn_remark)
+	@OnClick(R.id.btn_action_7)
 	private void onRemarkActionButtonClick(View view) {
 		final EditText et = new EditText(this);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="set_btntext"
+        android:title="按钮的名称" >
+        <EditTextPreference
+            android:defaultValue="吃奶开始"
+            android:key="btntext1"
+            android:summary="第1个按钮的名称" />
+        <EditTextPreference
+            android:defaultValue="吃奶结束"
+            android:key="btntext2"
+            android:summary="第2个按钮的名称" />
+        <EditTextPreference
+            android:defaultValue="便便"
+            android:key="btntext3"
+            android:summary="第3个按钮的名称" />
+        <EditTextPreference
+            android:defaultValue="AD钙"
+            android:key="btntext4"
+            android:summary="第4个按钮的名称" />
+        <EditTextPreference
+            android:defaultValue="喝水"
+            android:key="btntext5"
+            android:summary="第5个按钮的名称" />
+        <EditTextPreference
+            android:defaultValue="尿尿"
+            android:key="btntext6"
+            android:summary="第6个按钮的名称" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="set_childNum"
+        android:title="宝宝的数量" >
+        <CheckBoxPreference
+            android:defaultValue="off"
+            android:key="ck_uiForTwoChild"
+            android:summaryOff="一个宝宝专用"
+            android:summaryOn="两个宝宝使用"
+            android:title="点击改变使用宝宝的数量" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

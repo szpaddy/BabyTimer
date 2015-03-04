@@ -25,14 +25,12 @@
             android:text="2015-05-19"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <ToggleButton
+        <Button
             android:id="@+id/btn_childNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="ToggleButton"
-            android:textOff="宝宝专用"
-            android:textOn="两个宝宝" />
+            android:text="设置"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -48,21 +46,21 @@
             android:layout_weight="0" >
 
             <Button
-                android:id="@+id/btn_breast_begin"
+                android:id="@+id/btn_action_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="吃奶开始" />
 
             <Button
-                android:id="@+id/btn_breast_end"
+                android:id="@+id/btn_action_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="吃奶结束" />
 
             <Button
-                android:id="@+id/btn_poop"
+                android:id="@+id/btn_action_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -75,28 +73,28 @@
             android:layout_weight="0" >
 
             <Button
-                android:id="@+id/btn_vomit"
+                android:id="@+id/btn_action_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="AD钙" />
 
             <Button
-                android:id="@+id/btn_water"
+                android:id="@+id/btn_action_5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="喝水" />
 
             <Button
-                android:id="@+id/btn_pee"
+                android:id="@+id/btn_action_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="尿尿" />
 
             <Button
-                android:id="@+id/btn_remark"
+                android:id="@+id/btn_action_7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -123,6 +121,7 @@
                 android:id="@+id/rb_baby_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:checked="true"
                 android:text="一号宝宝" />
@@ -131,7 +130,7 @@
                 android:id="@+id/rb_baby_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
+                android:layout_marginRight="10dp"
                 android:text="二号宝宝" />
 
         </RadioGroup>
