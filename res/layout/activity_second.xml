@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+
+        <Switch
+            android:id="@+id/sw_play_heardbeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="心跳声播放状态"
+            android:textOff="停止播放"
+            android:textOn="正在播放" />
+
+    </LinearLayout>
+
+</RelativeLayout>

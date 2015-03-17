@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,7 +38,7 @@ import com.vincy.babytimer.utils.DateUtil;
 import com.vincy.babytimer.utils.MainToast;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements GestureListener {
 	private static final String TAG = "MainActivity";
 	public static final String BABY_ID_1 = "1";
 	public static final String BABY_ID_2 = "2";
@@ -93,6 +92,8 @@ public class MainActivity extends BaseActivity {
 
 		ViewUtils.inject(this);
 		db = DbUtils.create(this, "xUtils.db", 2, new MyDbUpgradeListener());
+
+		this.setGestureListener(this);
 
 		babyActionAdapter1 = new BabyActionAdapter(this);
 		lv_babyaction_1.setAdapter(babyActionAdapter1);
@@ -251,6 +252,7 @@ public class MainActivity extends BaseActivity {
 		} else {
 			layout_actionbtns.setVisibility(View.GONE);
 		}
+		this.updateBabyActionList();
 	}
 
 	private void insertBabyAction(String action) {
@@ -308,6 +310,22 @@ public class MainActivity extends BaseActivity {
 		} else {
 			return super.onKeyDown(keyCode, event);
 		}
+	}
+
+	@Override
+	public boolean onFlingLeft() {
+		showSecondScreen();
+		return false;
+	}
+
+	@Override
+	public boolean onFlingRight() {
+		return false;
+	}
+
+	private void showSecondScreen() {
+		Intent mainIntent = new Intent(this, SecondActivity.class);
+		this.startActivity(mainIntent);
 	}
 
 }
